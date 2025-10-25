@@ -2,7 +2,7 @@
 
 ## Notes
 Possible attacks to add into the simulation
-[ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
+[x] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
 [ ] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
 
