@@ -2,67 +2,68 @@
 
 ## Notes
 Possible attacks to add into the simulation
-[] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
-[] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
+- [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
-[ ] kerberoasting (common, a way to get service account hashes that we can crack)
+- [ ] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
 
-[ ] delegation stuff (common, enumerate constrained, unconstrained, and resource based delegation)
+- [ ] kerberoasting (common, a way to get service account hashes that we can crack)
 
-[ ] shadow creds (advanced, useful in many scenarios like webdav exploits, persistence, and a password change alternative)
+- [ ] delegation stuff (common, enumerate constrained, unconstrained, and resource based delegation)
 
-[ ] adcs stuff (less common, run things like certipy or certify, almost guarenteed that the target is vulnerable if they had a pentest/redteam)
+- [ ] shadow creds (advanced, useful in many scenarios like webdav exploits, persistence, and a password change alternative)
 
-[ ] evil twin stuff (no real need, man in the middle attacks)
+- [ ] adcs stuff (less common, run things like certipy or certify, almost guarenteed that the target is vulnerable if they had a pentest/redteam)
 
-[ ] updating script path object - genericall in bloodhound (advanced, a way to establish persistence or gain privesc)
+- [ ] evil twin stuff (no real need, man in the middle attacks)
 
-[ ] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
+- [ ] updating script path object - genericall in bloodhound (advanced, a way to establish persistence or gain privesc)
 
-[ ] port forward with ssh (less common but important, port forwards and proxies are used by every competent threat actor, ssh port forwarding must not be allowed)
+- [ ] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
 
-[ ] download dpapi cred files (commonish, useful stuff for dumping browser secrets like cookies and passwords and decrypting some windows credentials)
+- [ ] port forward with ssh (less common but important, port forwards and proxies are used by every competent threat actor, ssh port forwarding must not be allowed)
 
-[ ] download malware like mimikatz, rubeus (common malware, windows def. should detect them immediately)
+- [ ] download dpapi cred files (commonish, useful stuff for dumping browser secrets like cookies and passwords and decrypting some windows credentials)
 
-[ ] load powershell malware directly into memory (common evasion technique)
+- [ ] download malware like mimikatz, rubeus (common malware, windows def. should detect them immediately)
 
-[ ] zip concatenation attacks with winrar to evade email scanners (niche technique for phishing, mainly here because I'm amazed by the concept)
+- [ ] load powershell malware directly into memory (common evasion technique)
 
-[ ] unpac-the-hash (a commonish way to get usable credentials from kerberos tgs)
+- [ ] zip concatenation attacks with winrar to evade email scanners (niche technique for phishing, mainly here because I'm amazed by the concept)
 
-[ ] timeroasting (niche, really unlikely privesc vector)
+- [ ] unpac-the-hash (a commonish way to get usable credentials from kerberos tgs)
 
-[ ] search for creds in file shares (common, almost every company leaks credentials in public smb shares)
+- [ ] timeroasting (niche, really unlikely privesc vector)
 
-[ ] creating computer account (really common technique for exploiting many vulnerabilities, active directory allows users to add computer accoutns by default)
+- [ ] search for creds in file shares (common, almost every company leaks credentials in public smb shares)
 
-[ ] password, hash sprays (common technique for testing valid passwords against a list of users to abuse password reuse)
+- [ ] creating computer account (really common technique for exploiting many vulnerabilities, active directory allows users to add computer accoutns by default)
 
-[ ] adding dns entries (niche, active directory allows users to add dns entries that can cause dns spoofing)
+- [ ] password, hash sprays (common technique for testing valid passwords against a list of users to abuse password reuse)
 
-[ ] scan for webdav clients (a technique advanced threat actors would use)
+- [ ] adding dns entries (niche, active directory allows users to add dns entries that can cause dns spoofing)
 
-[ ] disable AMSI (common way to bypass powershell detection, should get caught by defender)
+- [ ] scan for webdav clients (a technique advanced threat actors would use)
 
-[ ] change an application's run command (advanced attackers can easily modify the command that is used to run an executable to establish stealthy persistence and privesc)
+- [ ] disable AMSI (common way to bypass powershell detection, should get caught by defender)
 
-[ ] rubeus and kekeo's tgtdeleg (advancedish technique to get a valid kerberos tgt after getting command execution on a target without knowing a users password)
+- [ ] change an application's run command (advanced attackers can easily modify the command that is used to run an executable to establish stealthy persistence and privesc)
 
-[ ] ntlmrelay2self with rbcd technique (advanced technique, instant SYSTEM level access if webdav client is enabled, no fix available as far as I'm aware)
+- [ ] rubeus and kekeo's tgtdeleg (advancedish technique to get a valid kerberos tgt after getting command execution on a target without knowing a users password)
 
-[ ] run windows exploit suggester (common, scan the compromised host for CVEs - should get detected by windows defender)
+- [ ] ntlmrelay2self with rbcd technique (advanced technique, instant SYSTEM level access if webdav client is enabled, no fix available as far as I'm aware)
 
-[ ] password spray over kerberos (use kerberos instead of smb or whatever else for stealth)
+- [ ] run windows exploit suggester (common, scan the compromised host for CVEs - should get detected by windows defender)
 
-[ ] prompt the user for password (common technique called local phishing, everyone falls for this attack, Cobalt Strike has a command called Askpassword)
+- [ ] password spray over kerberos (use kerberos instead of smb or whatever else for stealth)
 
-[ ] extract clipboard history for passwords etc. using Screenclip (advanced technique for stealthy password dump)
+- [ ] prompt the user for password (common technique called local phishing, everyone falls for this attack, Cobalt Strike has a command called Askpassword)
 
-[ ] extract notepad history for sensitive data (niche, I saw a john hammond video)
+- [ ] extract clipboard history for passwords etc. using Screenclip (advanced technique for stealthy password dump)
 
-[ ] general credential dump of the RunAs.exe or the RDP process (saw a Weekly Purple Team video)
+- [ ] extract notepad history for sensitive data (niche, I saw a john hammond video)
+
+- [ ] general credential dump of the RunAs.exe or the RDP process (saw a Weekly Purple Team video)
 
 
 ## Resources:
