@@ -3,6 +3,8 @@
 ## Notes
 Possible attacks to add into the simulation
 
+- [ ] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
+
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
 - [ ] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
