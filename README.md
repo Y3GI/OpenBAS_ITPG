@@ -67,7 +67,7 @@ Possible attacks to add into the simulation
 
 - [ ] general credential dump of the RunAs.exe or the RDP process (saw a Weekly Purple Team video)
 
-- [ ] enumerate, brute force mssql. when successful xp_cmdshell/xp_dirtree and whatever else. xp_cmdshell generally pops alerts in SIEM, brute-forcing mssql does not [source](https://www.youtube.com/watch?v=eDnvZ1NIr_w)
+- [ ] enumerate, brute force mssql. when successful xp_cmdshell/xp_dirtree and whatever else. xp_cmdshell generally pops alerts in SIEM, brute-forcing mssql does not [source](https://www.youtube.com/watch?v=eDnvZ1NIr_w) there are also the NETSPI articles
 
 
 ## Resources:
