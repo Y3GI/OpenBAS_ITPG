@@ -21,7 +21,7 @@ Possible attacks to add into the simulation
 
 - [ ] updating script path object - genericall in bloodhound (advanced, a way to establish persistence or gain privesc)
 
-- [ ] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
+- [ ] running winpeas (included in the diagram) (common tool for enumerating vulnerable windows machines, defender should detect it)
 
 - [ ] port forward with ssh (less common but important, port forwards and proxies are used by every competent threat actor, ssh port forwarding must not be allowed)
 
