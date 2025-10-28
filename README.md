@@ -47,7 +47,7 @@ Possible attacks to add into the simulation
 
 - [ ] scan for webdav clients (a technique advanced threat actors would use)
 
-- [ ] disable AMSI (common way to bypass powershell detection, should get caught by defender)
+- [ ] disable AMSI (inc. in diagram) (common way to bypass powershell detection, should get caught by defender)
 
 - [ ] change an application's run command (advanced attackers can easily modify the command that is used to run an executable to establish stealthy persistence and privesc)
 
