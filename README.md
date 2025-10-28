@@ -69,7 +69,7 @@ Possible attacks to add into the simulation
 
 - [ ] enumerate, brute force mssql. when successful xp_cmdshell/xp_dirtree and whatever else. xp_cmdshell generally pops alerts in SIEM, brute-forcing mssql does not [source](https://www.youtube.com/watch?v=eDnvZ1NIr_w) there are also the NETSPI articles
 
-- [ ] download a powershell based ransomware, potentially encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+- [ ] download a (powershell based?) ransomware, potentially encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
 
 
 ## Resources:
