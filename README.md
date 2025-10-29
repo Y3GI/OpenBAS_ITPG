@@ -83,4 +83,4 @@ Possible attacks to add into the simulation
 
 **Adversary Emulation Library**
 
-[Center For Threat Informed Defense](https://github.com/center-for-threat-informed-defense/adversary_emulation_library)
+- [Center For Threat Informed Defense](https://github.com/center-for-threat-informed-defense/adversary_emulation_library)
