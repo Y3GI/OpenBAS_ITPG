@@ -80,3 +80,7 @@ Possible attacks to add into the simulation
 **Pre-made malware payloads** that we can use within our simulations and as references to create our custom payloads.
 
 - [Atomic Red Teaming](https://www.atomicredteam.io/atomic-red-team)
+
+**Adversary Emulation Library**
+
+- [The Center for Threat-Informed Defence](https://github.com/center-for-threat-informed-defense)
