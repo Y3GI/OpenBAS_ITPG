@@ -1,9 +1,17 @@
 # OpenBAS_ITPG
 
 ## Notes
-Possible attacks to add into the simulation
+Attacks included in the simulation diagram
 
-- [ ] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
+- [x] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
+
+- [x] running winpeas (included in the diagram) (common tool for enumerating vulnerable windows machines, defender should detect it)
+
+Attacks implemented in OpenBAS
+
+- [ ] placeholder
+
+Possible attacks to add into the simulation
 
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
@@ -20,8 +28,6 @@ Possible attacks to add into the simulation
 - [ ] evil twin stuff (no real need, man in the middle attacks)
 
 - [ ] updating script path object - genericall in bloodhound (advanced, a way to establish persistence or gain privesc)
-
-- [ ] running winpeas (included in the diagram) (common tool for enumerating vulnerable windows machines, defender should detect it)
 
 - [ ] port forward with ssh (less common but important, port forwards and proxies are used by every competent threat actor, ssh port forwarding must not be allowed)
 
