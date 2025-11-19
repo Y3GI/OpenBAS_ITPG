@@ -23,7 +23,17 @@
 
 - [x] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
 
-- [x] running winpeas (included in the diagram) (common tool for enumerating vulnerable windows machines, defender should detect it)
+- [x] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
+
+- [x] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+
+- [x] wmic.exe for lateral movement (common way to perform lateral movement)
+
+- [x] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
+
+- [x] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
+
+- [x] SMB share discovery across every machine (common, passwords in SMB shares are still gold)
 
 ### Attacks implemented in OpenBAS
 
@@ -34,8 +44,6 @@
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
 - [ ] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
-
-- [ ] kerberoasting (common, a way to get service account hashes that we can crack)
 
 - [ ] delegation stuff (common, enumerate constrained, unconstrained, and resource based delegation)
 
@@ -92,5 +100,3 @@
 - [ ] general credential dump of the RunAs.exe or the RDP process (saw a Weekly Purple Team video)
 
 - [ ] enumerate, brute force mssql. when successful xp_cmdshell/xp_dirtree and whatever else. xp_cmdshell generally pops alerts in SIEM, brute-forcing mssql does not [source](https://www.youtube.com/watch?v=eDnvZ1NIr_w) there are also the NETSPI articles
-
-- [ ] download a (powershell based?) ransomware, potentially encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
