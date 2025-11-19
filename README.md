@@ -1,17 +1,35 @@
 # OpenBAS_ITPG
 
+----
+
+## Resources:
+**Pre-built scenarios** that we can use in our simulations and as references for our custom scenarios.
+
+- [XTM-Hub](https://hub.filigran.io/cybersecurity-solutions/open-bas-scenarios)
+
+**Pre-made malware payloads** that we can use within our simulations and as references to create our custom payloads.
+
+- [Atomic Red Teaming](https://www.atomicredteam.io/atomic-red-team)
+
+**Adversary Emulation Library**
+
+- [Center For Threat Informed Defense](https://github.com/center-for-threat-informed-defense/adversary_emulation_library)
+
+----
+
 ## Notes
-Attacks included in the simulation diagram
+
+### Attacks included in the simulation diagram**
 
 - [x] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
 
 - [x] running winpeas (included in the diagram) (common tool for enumerating vulnerable windows machines, defender should detect it)
 
-Attacks implemented in OpenBAS
+### Attacks implemented in OpenBAS
 
 - [ ] placeholder
 
-Possible attacks to add into the simulation
+### Possible attacks to add into the simulation
 
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
 
@@ -76,17 +94,3 @@ Possible attacks to add into the simulation
 - [ ] enumerate, brute force mssql. when successful xp_cmdshell/xp_dirtree and whatever else. xp_cmdshell generally pops alerts in SIEM, brute-forcing mssql does not [source](https://www.youtube.com/watch?v=eDnvZ1NIr_w) there are also the NETSPI articles
 
 - [ ] download a (powershell based?) ransomware, potentially encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
-
-
-## Resources:
-**Pre-built scenarios** that we can use in our simulations and as references for our custom scenarios.
-
-- [XTM-Hub](https://hub.filigran.io/cybersecurity-solutions/open-bas-scenarios)
-
-**Pre-made malware payloads** that we can use within our simulations and as references to create our custom payloads.
-
-- [Atomic Red Teaming](https://www.atomicredteam.io/atomic-red-team)
-
-**Adversary Emulation Library**
-
-- [Center For Threat Informed Defense](https://github.com/center-for-threat-informed-defense/adversary_emulation_library)
