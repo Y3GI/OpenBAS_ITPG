@@ -1,0 +1,77 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:139.0) Gecko/20100101 Firefox/139.0" version="29.0.3">
+  <diagram name="Page-1" id="N3mI7xiblCoK7LwGTr3U">
+    <mxGraphModel dx="2266" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="aY6V1TKmk_cw2QDlrVml-1" target="AfPMB-MMNBIGZ0W8IgNR-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-1" value="&lt;b&gt;Initial Access&lt;/b&gt;&lt;br&gt;An OpenBAS agent is deployed to a victim machine in the target network by the client" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="-101" y="120" width="282" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="aY6V1TKmk_cw2QDlrVml-2" target="aY6V1TKmk_cw2QDlrVml-6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-2" value="&lt;div&gt;&lt;b&gt;Discovery:&lt;/b&gt;&amp;nbsp;&lt;b&gt;Domain Computer Discovery&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;(MA_T1018)&lt;/b&gt;&lt;/div&gt;&lt;br&gt;List all the computers in the network using the built-in utility ADSISearcher, filter for computer name&lt;br&gt;&lt;br&gt;&lt;b&gt;ART_97e89d9e-e3f5-41b5-a90f-1e0825df0fdf&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="550" y="90" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-4" value="&lt;b&gt;LEGEND&lt;br&gt;&lt;br&gt;ART_&amp;lt;guid&amp;gt; :&lt;/b&gt; Atomic Red Team test with the given guid&lt;br&gt;&lt;b&gt;&lt;br&gt;MA_&amp;lt;id&amp;gt;: &lt;/b&gt;Technique or tactic ID from Mitre ATTACK&lt;br&gt;&lt;b&gt;&lt;br&gt;&amp;lt;unified_kill_chain_step&amp;gt;: &amp;lt;tech_name&amp;gt;: &lt;/b&gt;Adversary technique and it&#39;s place in the unified kill chain" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-120" y="210" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="aY6V1TKmk_cw2QDlrVml-6" target="aY6V1TKmk_cw2QDlrVml-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-6" value="&lt;b&gt;Discovery:&lt;/b&gt;&amp;nbsp;&lt;b&gt;SMB Share Discovery&lt;/b&gt;&lt;br&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Using the output of the prev. step, the agent runs&lt;/div&gt;&lt;b&gt;ART_20f1097d-81c1-405c-8380-32174d493bbb&lt;/b&gt;&lt;br&gt;or a custom version of&lt;br&gt;&lt;b&gt;ART_1b0814d1-bb24-402d-9615-1b20c50733fb&lt;/b&gt;&lt;br&gt;that can query remote hosts." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="550" y="230" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="F2Sgz6QcF9gFtKT4KWzV-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="aY6V1TKmk_cw2QDlrVml-9" target="F2Sgz6QcF9gFtKT4KWzV-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="691" y="380.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="aY6V1TKmk_cw2QDlrVml-9" value="&lt;b&gt;Discovery: Kerberoasting (MA_&lt;/b&gt;&lt;span class=&quot;h5 card-title&quot;&gt;&lt;/span&gt;&lt;b&gt;T1558.003)&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Perform a kerberoasting attack using Powershell&lt;br&gt;&lt;br&gt;&lt;div&gt;&lt;b&gt;ART_902f4ed2-1aba-4133-90f2-cff6d299d6da&lt;/b&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="230" y="230" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="F2Sgz6QcF9gFtKT4KWzV-5" target="0dYUc7PKLWN3FexRstC5-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="F2Sgz6QcF9gFtKT4KWzV-5" value="&lt;b&gt;Credential Access: Leak Browser Secrets (MA_T1555.003&lt;/b&gt;&lt;b&gt;)&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;Steal session cookies and user passwords from browsers.&lt;br&gt;Although this technique is used heavily by threat actors, the ART lacks a reliable PoC.&lt;br&gt;Therefore, the exact test needs further research." style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="230" y="380" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0dYUc7PKLWN3FexRstC5-2" target="AfPMB-MMNBIGZ0W8IgNR-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="691.5555555555557" y="680.0000000000002" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0dYUc7PKLWN3FexRstC5-2" value="&lt;b&gt;Credential Access: Dump OS Passwords&lt;/b&gt;&lt;div&gt;&lt;b&gt;(&lt;/b&gt;&lt;b&gt;MA_&lt;/b&gt;&lt;span class=&quot;h5 card-title&quot;&gt;&lt;/span&gt;&lt;b&gt;T1003.002)&lt;/b&gt;&lt;/div&gt;&lt;br&gt;Use credentials that provide high level access to a computer to dump the passwords stored in it.&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;b&gt;ART_21df41be-cdd8-4695-a650-c3981113aa3c&lt;br&gt;ART_5c2571d0-1572-416d-9676-812e64ca9f44&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="550" y="380" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-28" value="Note: These 2 will be combined into 1 test" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="470" y="50" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AfPMB-MMNBIGZ0W8IgNR-33" target="AfPMB-MMNBIGZ0W8IgNR-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-33" value="&lt;b&gt;Discovery: System Information Discovery&lt;/b&gt;&lt;div&gt;&lt;b&gt;(&lt;/b&gt;&lt;b&gt;MA_&lt;/b&gt;&lt;span class=&quot;h5 card-title&quot;&gt;&lt;/span&gt;&lt;b&gt;T1082)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Download and run the privilege escalation utility Winpeas&lt;br&gt;&lt;br&gt;&lt;b&gt;ART_eea1d918-825e-47dd-acc2-814d6c58c0e1&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="530" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="AfPMB-MMNBIGZ0W8IgNR-34" target="aY6V1TKmk_cw2QDlrVml-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-34" value="&lt;div&gt;&lt;b&gt;Privilege Escalation: UAC Bypass&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;The agent runs as Administrator, we can bypass UAC using fodhelper.exe&lt;br&gt;&lt;br&gt;&lt;b&gt;ART_3f627297-6c38-4e7d-a278-fc2563eaaeaa&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="90" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="AfPMB-MMNBIGZ0W8IgNR-39" target="AfPMB-MMNBIGZ0W8IgNR-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-39" value="&lt;b&gt;Lateral Movement: WMIExec&lt;/b&gt;&lt;div&gt;&lt;b&gt;(&lt;/b&gt;&lt;b&gt;MA_&lt;/b&gt;&lt;span class=&quot;h5 card-title&quot;&gt;&lt;/span&gt;&lt;b&gt;T1047)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Execute commands on remote hosts using the built-in wmic.exe executable.&lt;br&gt;&lt;br&gt;&lt;b&gt;ART_9c8ef159-c666-472f-9874-90c8d60d136b&lt;/b&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="530" width="282" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="AfPMB-MMNBIGZ0W8IgNR-42" value="&lt;b&gt;Impact: Ransomware&lt;/b&gt;&lt;div&gt;&lt;b&gt;(&lt;/b&gt;&lt;b&gt;MA_&lt;/b&gt;&lt;span class=&quot;h5 card-title&quot;&gt;&lt;/span&gt;&lt;b&gt;T1486)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;Encrypt local files using a custom Powershell encryptor, don&#39;t forget to cleanup." style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="680" width="282" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
