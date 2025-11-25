@@ -19,25 +19,21 @@
 
 ## Notes
 
-### Attacks included in the simulation diagram**
-
-- [x] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
+### Attacks included in the simulation diagram (implemented attacks are crossed-out)**
 
 - [x] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
 
-- [x] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
-
-- [x] wmic.exe for lateral movement (common way to perform lateral movement)
-
-- [x] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
-
-- [x] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
-
 - [x] SMB share discovery across every machine (common, passwords in SMB shares are still gold)
 
-### Attacks implemented in OpenBAS
+- [ ] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
 
-- [ ] placeholder
+- [ ] wmic.exe for lateral movement (common way to perform lateral movement)
+
+- [ ] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
+
+- [ ] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
+
+- [ ] (prob. to be removed) UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
 
 ### Possible attacks to add into the simulation
 
