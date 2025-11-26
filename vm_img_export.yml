@@ -1,0 +1,196 @@
+---
+- name: End-to-end: vSphere VMDK -> Azure Image -> VM
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    # Azure location
+    azure_location: "eastus"
+
+    # Resource group for the custom image & storage
+    image_resource_group: "rg-openbas-images"
+
+    # Resource group for the VM and networking
+    vm_resource_group: "rg-openbas-vms"
+
+    # Storage account & container for the VHD (must be globally unique, lowercase, no special chars)
+    storage_account_name: "openbasimagestorage123"
+    storage_container_name: "vhds"
+    vhd_blob_name: "openbas.vhd"
+
+    # Local paths to your vSphere image
+    local_vmdk_path: "/path/to/openbas.vmdk"   # <-- path on the Ansible control machine
+    local_vhd_path: "/tmp/openbas.vhd"         # temp VHD output
+
+    # Managed image name in Azure
+    image_name: "openbas-custom-image"
+
+    # VM configuration
+    vm_name: "openbasVM"
+    vm_size: "Standard_DS1_v2"
+    admin_username: "openbas"
+    ssh_public_key_path: "~/.ssh/id_rsa.pub"
+
+    # Networking
+    vnet_name: "openbasVnet"
+    vnet_address_prefix: "10.0.0.0/16"
+    subnet_name: "openbasSubnet"
+    subnet_prefix: "10.0.1.0/24"
+    public_ip_name: "openbasPublicIP"
+    nsg_name: "openbasNSG"
+    nic_name: "openbasNIC"
+
+  tasks:
+    # 0. PRECHECKS / PREREQUISITES
+    - name: Check that qemu-img is installed
+    # qemu-img is used to convert VMDK -> VHD
+      command: qemu-img --version
+      register: qemu_check
+      changed_when: false
+
+    - name: Check that Azure CLI is installed
+      command: az --version
+      register: az_check
+      changed_when: false
+
+    # 1. CONVERT LOCAL VMDK -> VHD (fixed-size)
+    - name: Convert VMDK to fixed-size VHD (only if VHD does not exist)
+      command: >
+        qemu-img convert -f vmdk -O vpc {{ local_vmdk_path }} {{ local_vhd_path }}
+      args:
+        creates: "{{ local_vhd_path }}"
+
+    # 2. RESOURCE GROUPS
+    - name: Create resource group for images & storage
+      azure_rm_resourcegroup:
+        name: "{{ image_resource_group }}"
+        location: "{{ azure_location }}"
+
+    - name: Create resource group for VM and networking
+      azure_rm_resourcegroup:
+        name: "{{ vm_resource_group }}"
+        location: "{{ azure_location }}"
+
+
+    # 3. STORAGE ACCOUNT + CONTAINER + UPLOAD VHD (VIA AZURE CLI)
+    - name: Create storage account for VHD (idempotent via az)
+      command: >
+        az storage account create
+        --name {{ storage_account_name }}
+        --resource-group {{ image_resource_group }}
+        --location {{ azure_location }}
+        --sku Standard_LRS
+        --kind StorageV2
+      register: sa_create
+
+    - name: Get storage account key
+      command: >
+        az storage account keys list
+        --resource-group {{ image_resource_group }}
+        --account-name {{ storage_account_name }}
+        --query [0].value
+        --output tsv
+      register: sa_key
+      changed_when: false
+
+    - name: Ensure VHD container exists
+      command: >
+        az storage container create
+        --name {{ storage_container_name }}
+        --account-name {{ storage_account_name }}
+        --account-key {{ sa_key.stdout }}
+      register: container_create
+
+    - name: Upload VHD to Azure as page blob
+      command: >
+        az storage blob upload
+        --account-name {{ storage_account_name }}
+        --account-key {{ sa_key.stdout }}
+        --container-name {{ storage_container_name }}
+        --file {{ local_vhd_path }}
+        --name {{ vhd_blob_name }}
+        --type page
+      register: vhd_upload
+
+    - name: Set fact for VHD URI
+      set_fact:
+        vhd_uri: "https://{{ storage_account_name }}.blob.core.windows.net/{{ storage_container_name }}/{{ vhd_blob_name }}"
+
+    # 4. CREATE MANAGED IMAGE FROM VHD
+    - name: Create managed image from uploaded VHD
+      command: >
+        az image create
+        --resource-group {{ image_resource_group }}
+        --name {{ image_name }}
+        --location {{ azure_location }}
+        --os-type Linux
+        --source {{ vhd_uri }}
+      register: image_create
+
+    # 5. NETWORKING FOR THE VM
+    - name: Create virtual network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ vm_resource_group }}"
+        name: "{{ vnet_name }}"
+        address_prefixes: "{{ vnet_address_prefix }}"
+
+    - name: Create subnet
+      azure_rm_subnet:
+        resource_group: "{{ vm_resource_group }}"
+        name: "{{ subnet_name }}"
+        address_prefix: "{{ subnet_prefix }}"
+        virtual_network: "{{ vnet_name }}"
+
+    - name: Create public IP address
+      azure_rm_publicipaddress:
+        resource_group: "{{ vm_resource_group }}"
+        allocation_method: Static
+        name: "{{ public_ip_name }}"
+      register: output_ip_address
+
+    - name: Show public IP
+      debug:
+        msg: "The public IP is {{ output_ip_address.state.ip_address }}"
+
+    - name: Create Network Security Group that allows SSH
+      azure_rm_securitygroup:
+        resource_group: "{{ vm_resource_group }}"
+        name: "{{ nsg_name }}"
+        rules:
+          - name: SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 1001
+            direction: Inbound
+
+    - name: Create network interface
+      azure_rm_networkinterface:
+        resource_group: "{{ vm_resource_group }}"
+        name: "{{ nic_name }}"
+        virtual_network: "{{ vnet_name }}"
+        subnet: "{{ subnet_name }}"
+        public_ip_name: "{{ public_ip_name }}"
+        security_group: "{{ nsg_name }}"
+
+    # 6. CREATE VM FROM THE CUSTOM IMAGE
+    - name: Read SSH public key
+      slurp:
+        src: "{{ ssh_public_key_path | expanduser }}"
+      register: ssh_pub
+
+    - name: Create VM from custom managed image
+      azure_rm_virtualmachine:
+        resource_group: "{{ vm_resource_group }}"
+        name: "{{ vm_name }}"
+        vm_size: "{{ vm_size }}"
+        admin_username: "{{ admin_username }}"
+        ssh_password_enabled: false
+        ssh_public_keys:
+          - path: "/home/{{ admin_username }}/.ssh/authorized_keys"
+            key_data: "{{ ssh_pub.content | b64decode }}"
+        network_interfaces: "{{ nic_name }}"
+        image:
+          name: "{{ image_name }}"
+          resource_group: "{{ image_resource_group }}"
