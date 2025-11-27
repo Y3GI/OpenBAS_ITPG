@@ -33,13 +33,14 @@
 
 - [ ] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
 
-- [ ] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
-
-- [ ] (prob. to be removed) UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
 
 ### Possible attacks to add into the simulation
 
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
+
+- [ ] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
+
+- [ ] UAC bypass (common, bypass Windows restrictions using fodhelper.exe etc.)
 
 - [ ] asrep-roasting (common, a way to get password hashes for accounts that have pre-auth disabled)
 
