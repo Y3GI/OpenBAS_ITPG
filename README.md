@@ -25,7 +25,9 @@
 
 - [x] SMB share discovery across every machine (common, passwords in SMB shares are still gold)
 
-- [ ] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+- [x] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+
+- [x] dump OS passwords (SAM, LSA, SECURITY)
 
 - [ ] wmic.exe for lateral movement (common way to perform lateral movement)
 
