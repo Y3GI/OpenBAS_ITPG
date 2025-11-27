@@ -19,15 +19,15 @@
 
 ## Notes
 
-### Attacks included in the simulation diagram (implemented attacks are crossed-out)**
+### Attacks included in the simulation diagram (implemented attacks are crossed-out)
 
-- [x] running winpeas (common tool for enumerating vulnerable windows machines, defender should detect it)
+- [x] (CKC: delivery) downloading and running winpeas over HTTP (common tool for enumerating vulnerable windows machines, defender should detect it)
 
-- [x] SMB share discovery across every machine (common, passwords in SMB shares are still gold)
+- [x] (CKC: discovery) SMB share discovery across every machine (common, passwords in SMB shares are still gold)
 
-- [x] download a (powershell based?) ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+- [x] (CKC: actions on objective) download a ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
 
-- [x] dump OS passwords (SAM, LSA, SECURITY)
+- [x] (CKC: exploitation) dump OS passwords (SAM, LSA, SECURITY)
 
 - [ ] wmic.exe for lateral movement (common way to perform lateral movement)
 
