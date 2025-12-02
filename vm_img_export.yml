@@ -1,12 +1,12 @@
 ---
-- name: End-to-end: vSphere VMDK -> Azure Image -> VM
+- name: "End-to-end: vSphere VMDK -> Azure Image -> VM"
   hosts: localhost
   connection: local
   gather_facts: false
 
   vars:
     # Azure location
-    azure_location: "eastus"
+    azure_location: "northeu"
 
     # Resource group for the custom image & storage
     image_resource_group: "rg-openbas-images"
@@ -20,8 +20,9 @@
     vhd_blob_name: "openbas.vhd"
 
     # Local paths to your vSphere image
-    local_vmdk_path: "/path/to/openbas.vmdk"   # <-- path on the Ansible control machine
-    local_vhd_path: "/tmp/openbas.vhd"         # temp VHD output
+    local_vmdk_path: "Ubuntu_1-1.vmdk"   # <-- path on the Ansible control machine
+    local_vhd_path: "/tmp/Ubuntu_1.vhd"         # temp VHD output
+    img_format: "vmdk"       # img format
 
     # Managed image name in Azure
     image_name: "openbas-custom-image"
@@ -57,7 +58,7 @@
     # 1. CONVERT LOCAL VMDK -> VHD (fixed-size)
     - name: Convert VMDK to fixed-size VHD (only if VHD does not exist)
       command: >
-        qemu-img convert -f vmdk -O vpc {{ local_vmdk_path }} {{ local_vhd_path }}
+        qemu-img convert -f {{ img_format }} -O vpc {{ local_vmdk_path }} {{ local_vhd_path }}
       args:
         creates: "{{ local_vhd_path }}"
 
