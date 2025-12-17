@@ -18,6 +18,7 @@ $openbas_base_url = "http://$hostname" + ":8080"
 # Add antivirus exclusions
 add-mppreference -ExclusionProcess "openbas-agent.exe"
 add-mppreference -ExclusionPath "C:\Program Files (x86)\Filigran\OBAS Agent\openbas-agent.exe"
+add-mppreference -ExclusionPath "C:\Program Files (x86)\Filigran\OBAS Agent\openbas-agent.exe"
 
 # Create the WebRequestSession object
 $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
@@ -46,3 +47,4 @@ iex (iwr $agent_url).Content
 echo "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
