@@ -88,9 +88,10 @@ $res = (Invoke-WebRequest -UseBasicParsing -Uri $token_url `
 # Output the token value
 $token = $res.token_value
 $agent_url = $openbas_base_url + "/api/agent/installer/openbas/windows/service/$token"
-iex (iwr $agent_url).Content
+iex (iwr -UseBasicParsing $agent_url).Content
 
 # Restart for the long paths registry to take effect
 echo "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
+
 Restart-Computer
