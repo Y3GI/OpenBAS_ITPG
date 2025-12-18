@@ -1,13 +1,28 @@
+# openbasfontys@gmail.com
+# OpenBAS_P1
+
 param (
       [string]$hostname,
       [string]$openbasusername,
       [string]$openbaspassword
 )
 
-$usage = "Usage: .\agent_install.ps1 openbas_url"
+$usage = "Usage: .\agent_install.ps1 openbas_url openbas_username openbas_password"
 
 if (-not $hostname) {
     echo "Missing hostname"
+    echo $usage
+    exit 1
+}
+
+if (-not $openbasusername) {
+    echo "Missing username"
+    echo $usage
+    exit 1
+}
+
+if (-not $password) {
+    echo "Missing password"
     echo $usage
     exit 1
 }
