@@ -10,19 +10,19 @@ param (
 $usage = "Usage: .\agent_install.ps1 openbas_url openbas_username openbas_password"
 
 if (-not $hostname) {
-    echo "Missing hostname"
+    echo "Missing parameters"
     echo $usage
     exit 1
 }
 
 if (-not $openbasusername) {
-    echo "Missing username"
+    echo "Missing the second and third parameters"
     echo $usage
     exit 1
 }
 
-if (-not $password) {
-    echo "Missing password"
+if (-not $openbaspassword) {
+    echo "Missing the third parameter"
     echo $usage
     exit 1
 }
