@@ -2,21 +2,31 @@
 # OpenBAS_P1
 
 param (
-    [string]$openbas_server_ip,
+    [string]$openbas_base_url,
     [string]$openbasusername,
     [string]$openbaspassword
 )
 
-$usage = "Usage: pwsh.exe -ep bypass /c .\agent_install.ps1 openbas_server_ip openbas_username openbas_password"
+$usage = @"
+Usage:
+powershell -ep bypass /c .\agent_install.ps1 openbas_base_url openbas_username openbas_password
 
+Note: openbas_base_url must have the same value as in OpenBAS's .env file (OPENBAS_BASE_URL) without a back slash at the end
+
+Example:
+powershell -ep bypass /c .\agent_install.ps1 http://172.16.2.3:8080 test@test.com Test_Pass123
+"@
+
+<#
 if ($PSVersionTable.PSVersion.Major -ne 7) {
     Write-Output "OpenBAS agent requires Powershell version 7 (pwsh.exe)"
     Write-Output "This script will try installing it for you"
     winget install Microsoft.Powershell --accept-package-agreements --accept-source-agreements
     Write-Output "Please run the script with Powershell 7"
 }
+#>
 
-if (-not $openbas_server_ip) {
+if (-not $openbas_base_url) {
     Write-Output "Missing parameters"
     Write-Output $usage
     exit 1
@@ -37,9 +47,6 @@ if (-not $openbaspassword) {
 # Enable long file paths
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
     -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-
-# Base URL (fixed concatenation)
-$openbas_base_url = "http://$openbas_server_ip:8080"
 
 # Antivirus exclusions
 Add-MpPreference -ExclusionProcess "openbas-agent.exe"
@@ -99,7 +106,6 @@ $res = (Invoke-WebRequest -UseBasicParsing `
         "Accept"          = "application/json, text/plain, */*"
         "Accept-Encoding" = "gzip, deflate"
         "Accept-Language" = "en-US,en;q=0.9"
-        "Referer"         = "$openbas_base_url/admin/agents"
         "responseType"    = "json"
     }
 ).Content | ConvertFrom-Json
@@ -114,4 +120,5 @@ iex (iwr -UseBasicParsing $agent_url).Content
 Write-Output "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
 
