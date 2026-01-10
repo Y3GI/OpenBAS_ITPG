@@ -41,7 +41,7 @@ add-mppreference -ExclusionPath "C:\Program Files (x86)\Filigran\OBAS Agent\open
 # Authenticate to OpenBAS
 $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
 $session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0"
-$rawContent = (Invoke-WebRequest -UseBasicParsing -Uri "http://openbas:8080/api/login" `
+$rawContent = (Invoke-WebRequest -UseBasicParsing -Uri $openbas_base_url/api/login `
 -Method "POST" `
 -WebSession $session `
 -Headers @{
@@ -68,8 +68,8 @@ if ($rawContent -match $cookiePattern) {
 }
 
 # Create the WebRequestSession object
-$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
-$session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0"
+#$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+#$session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0"
 $session.Cookies.Add((New-Object System.Net.Cookie("JSESSIONID", "$jsessionId", "/", "openbas")))
 
 # Construct the URL using the provided openbas_server_ip
@@ -95,4 +95,5 @@ echo "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 
 Restart-Computer
+
 
