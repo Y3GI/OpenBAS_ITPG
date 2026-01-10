@@ -11,7 +11,9 @@ $usage = @"
 Usage:
 powershell -ep bypass /c .\agent_install.ps1 openbas_base_url openbas_username openbas_password
 
-Note: openbas_base_url must have the same value as in OpenBAS's .env file (OPENBAS_BASE_URL) without a back slash at the end
+Note:
+`$openbas_base_url must have the same value as in OpenBAS's .env file (OPENBAS_BASE_URL) without a back slash at the end.
+If this is a `$openbas_base_url contains a DNS name, make sure this computer can resolve it.
 
 Example:
 powershell -ep bypass /c .\agent_install.ps1 http://172.16.2.3:8080 test@test.com Test_Pass123
@@ -120,5 +122,6 @@ iex (iwr -UseBasicParsing $agent_url).Content
 Write-Output "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
 
 
