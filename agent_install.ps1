@@ -95,7 +95,7 @@ if ($rawContent -match $cookiePattern) {
 
 # Attach cookie (fixed domain interpolation)
 $session.Cookies.Add(
-    (New-Object System.Net.Cookie("JSESSIONID", $jsessionId, "/", $openbas_server_ip))
+    (New-Object System.Net.Cookie("JSESSIONID", $jsessionId, "/", ([uri]$openbas_base_url).Host))
 )
 
 # Token URL
@@ -122,6 +122,7 @@ iex (iwr -UseBasicParsing $agent_url).Content
 Write-Output "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
 
 
 
