@@ -1,12 +1,1 @@
-$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
-$session.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36 Edg/142.0.0.0"
-$session.Cookies.Add((New-Object System.Net.Cookie("JSESSIONID", "247A28C82F6EF607ADB7077F2035AE90", "/", "openbas")))
-Invoke-WebRequest -UseBasicParsing -Uri "http://openbas:8080/api/me/tokens" `
--WebSession $session `
--Headers @{
-"Accept"="application/json, text/plain, */*"
-  "Accept-Encoding"="gzip, deflate"
-  "Accept-Language"="en-US,en;q=0.9"
-  "Referer"="http://openbas:8080/admin/agents"
-  "responseType"="json"
-}
+
