@@ -9,6 +9,14 @@ param (
 
 $usage = "Usage: .\agent_install.ps1 openbas_server_ip openbas_username openbas_password"
 
+if (-not ($PSVersionTable.PSVersion.Major -eq "7")) {
+    echo "OpenBAS agent requires Powershell version 7 (pwsh.exe)"
+    echo "This script will try installing it for you"
+    winget install Microsoft.Powershell --accept-package-agreements --accept-source-agreements
+
+    echo "Please run the script with Powershell 7
+}
+
 if (-not $openbas_server_ip) {
     echo "Missing parameters"
     echo $usage
@@ -95,5 +103,6 @@ echo "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 
 Restart-Computer
+
 
 
