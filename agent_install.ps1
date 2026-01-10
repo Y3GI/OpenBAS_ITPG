@@ -7,7 +7,7 @@ param (
     [string]$openbaspassword
 )
 
-$usage = "Usage: .\agent_install.ps1 openbas_server_ip openbas_username openbas_password"
+$usage = "Usage: pwsh.exe -ep bypass /c .\agent_install.ps1 openbas_server_ip openbas_username openbas_password"
 
 if ($PSVersionTable.PSVersion.Major -ne 7) {
     Write-Output "OpenBAS agent requires Powershell version 7 (pwsh.exe)"
@@ -114,3 +114,4 @@ iex (iwr -UseBasicParsing $agent_url).Content
 Write-Output "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
