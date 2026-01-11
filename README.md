@@ -21,22 +21,22 @@
 
 ### Attacks included in the simulation diagram (implemented attacks are crossed-out)
 
-- [x] (CKC: delivery) downloading and running winpeas over HTTP (common tool for enumerating vulnerable windows machines, defender should detect it)
+- [x] (CKC: discovery) computer and SMB share discovery across every machine (common, passwords in SMB shares are still gold)
 
-- [x] (CKC: discovery) SMB share discovery across every machine (common, passwords in SMB shares are still gold)
-
-- [x] (CKC: actions on objective) download a ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
+- [x] (CKC: delivery) wmic.exe for lateral movement (common way to perform lateral movement)
 
 - [x] (CKC: exploitation) dump OS passwords (SAM, LSA, SECURITY)
 
-- [ ] wmic.exe for lateral movement (common way to perform lateral movement)
+- [x] (CKC: installation) downloading a custom, Powershell based ransomware over HTTP (HTTP is a common method of delivery)
 
-- [ ] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
+- [x] (CKC: actions on objective) execute the downloaded ransomware, encrypt some bogus files [source](https://youtu.be/LsUapxGAigE?si=8FFMYvI-EXpZ_jRf&t=864)
 
 
 ### Possible attacks to add into the simulation
 
 - [ ] responder.py (common, llmnr/netbios poisoning, opens the path to relay and password cracking attacks)
+
+- [ ] kerberoasting (common, a way to get service account hashes that we can crack; no actual cracking though because we don't need to)
 
 - [ ] dump browser passwords (common, chrome recently added a security feature though, so not as reliable; can be bypassed)
 
