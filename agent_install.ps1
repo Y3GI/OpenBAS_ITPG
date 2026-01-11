@@ -46,6 +46,16 @@ if (-not $openbaspassword) {
     exit 1
 }
 
+# Create directory to store bogus files for encryption during the ransomware stage
+if (-not(Test-Path "C:\Users\Administrator\ransomware_simulation\" -PathType Container)) {
+    New-Item -path "C:\Users\Administrator\ransomware_simulation\" -ItemType Directory
+}
+
+# Create bogus files for encryption during the ransomware stage
+for ($i=1; $i -le 100; $i++) {
+  Write-Output "Very Important Business Confidential Data" > "C:\Users\Administrator\ransomware_simulation\simulated_important_file_$i.txt"
+}
+
 # Enable long file paths
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
     -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
@@ -122,6 +132,7 @@ iex (iwr -UseBasicParsing $agent_url).Content
 Write-Output "Machine will restart for changes to take effect in 7 seconds"
 Start-Sleep 7
 Restart-Computer
+
 
 
 
