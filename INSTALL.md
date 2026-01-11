@@ -21,8 +21,10 @@ $ netstat -nltp  # you should see port 8443 open for 0.0.0.0
 
 6. From the imported scenario, choose injects and Modify Assets accordingly:
 
-  a. Inject 1–2 → Computer A agent 
+a. Inject 1–2 → Computer A
 
-  b. Inject 3–5 → Computer B agent 
+b. Inject 3–5 → Computer B
 
-7. Execute simulation 
+Note: Inject 2 (Delivery with WMI) requires you to set the "node" parameter to the IP of Computer B in your environment yourself. By default, it is set to 192.168.2.4 which was the IP address of Computer B in our environment. This is the only parameter that requires its the default value to be changed.
+
+8. Execute simulation 
