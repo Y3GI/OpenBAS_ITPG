@@ -29,7 +29,7 @@ Example:
 powershell -ep bypass /c .\agent_install.ps1 http://172.16.2.3:8080 test@test.com Test_Pass123
 ```
 
-5. Log into your OpenBAS server (localhost:8080) and import scenario [OpenBAS Adversary Emulation](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/Generic%20Adversary%20Emulation%20-%20Assumed%20Breach_2026-01-11T15_06_24.407710056Z_(with_teams%20%26%20with_players%20%26%20with_variable_values).zip) into your OpenBAS server. 
+5. Log into your OpenBAS server (localhost:8080) and import scenario [OpenBAS Adversary Emulation](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/Generic%20Adversary%20Emulation.zip) into your OpenBAS server. 
 
 6. From the imported scenario, choose injects and Modify Assets accordingly:
 
