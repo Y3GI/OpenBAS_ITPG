@@ -37,6 +37,8 @@ powershell -ep bypass /c .\agent_install.ps1 http://172.16.2.3:8080 test@test.co
 
     b. Inject 3–5 → Computer B
 
-    Note: Inject 2 (Delivery with WMI) requires you to set the "node" parameter to the IP of Computer B in your environment yourself. By default, it is set to 192.168.2.4 which was the IP address of Computer B in our     environment. This is the only parameter that requires its the default value to be changed.
+    Note: Inject 2 (Delivery with WMI) requires you to set the "node" parameter to the IP of Computer B in your environment yourself. By default, it is set to 192.168.2.4 which was the IP address of Computer B in our     environment.
+
+   Note: Inject 4 and 5 (Installation and execution of ransomware) requires you to set the `openbas_server_ip_or_domain_name` to the ip address of domain name of your OpenBAS server.
 
 8. Execute simulation 

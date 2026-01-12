@@ -21,8 +21,8 @@ This simulation covers the following stages of the Cyber Kill Chain:
 -   **Discovery:** Computer and SMB share discovery.
 -   **Delivery:** Lateral movement using `wmic.exe`.
 -   **Exploitation:** Dumping OS passwords (SAM, LSA, SECURITY).
--   **Installation:** Downloading a custom, PowerShell-based ransomware over HTTP.
--   **Actions on Objective:** Executing the downloaded ransomware to encrypt bogus files.
+-   **Installation:** Downloading a custom, PowerShell-based ransomware over HTTP filelessly.
+-   **Actions on Objective:** Executing the downloaded ransomware to encrypt files.
 
 ## General User Advice
 
