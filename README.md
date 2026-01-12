@@ -2,6 +2,9 @@
 
 This project is an adversary emulation scenario for OpenBAS. It simulates a series of attacks that an adversary might perform in a real-world environment.
 
+## Documentation
+Refer to [Full Documentation](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/Documents/ITPG_OpenBAS_Adversary_Emulation_Full_Documentation.docx)
+
 ## Prerequisites
 
 - A working OpenBAS server on a Linux machine.
