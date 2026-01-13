@@ -1,0 +1,138 @@
+---
+- name: "End-to-end: Downloaded VHD -> Azure Image -> VM"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    azure_tenant_id: "87742002-ea9f-4d0c-a979-6c0dd90a4a18"
+    azure_subscription_id: "3961ff7d-1efb-4020-ba80-0ecb29884f8e"
+
+
+    marketplace_image: "MicrosoftWindowsServer:WindowsServer:2019-Datacenter-gensecond:latest"
+
+    random_id: "900"
+    azure_location: "northeurope"
+    target_resource_group: "rg-openbas-win-{{ random_id }}"
+
+    vm_name: "BASVM"
+    vm_size: "Standard_DC2s_v3"
+
+    admin_username: "openbasadmin"
+    temp_admin_password: "FontysBas123!"
+
+    vnet_name: "winVnet"
+    subnet_name: "winSubnet"
+    public_ip_name: "winPublicIP"
+    nsg_name: "winNSG"
+    nic_name: "winNIC"
+
+  tasks:
+    - name: Create resource group
+      command: >
+        az group create
+        --subscription {{ azure_subscription_id }}
+        --name {{ target_resource_group }}
+        --location {{ azure_location }}
+
+    - name: Create VNet
+      command: >
+        az network vnet create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ vnet_name }}
+        --address-prefix 10.0.0.0/16
+
+    - name: Create subnet
+      command: >
+        az network vnet subnet create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --vnet-name {{ vnet_name }}
+        --name {{ subnet_name }}
+        --address-prefix 10.0.1.0/24
+
+    - name: Create public IP
+      command: >
+        az network public-ip create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ public_ip_name }}
+        --allocation-method Static
+
+    - name: Create NSG
+      command: >
+        az network nsg create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ nsg_name }}
+
+    - name: Allow RDP (3389)
+      command: >
+        az network nsg rule create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --nsg-name {{ nsg_name }}
+        --name AllowRDP
+        --priority 1000
+        --destination-port-ranges 3389
+        --protocol Tcp
+        --access Allow
+        --direction Inbound
+
+    - name: Allow SMB (445)
+      command: >
+        az network nsg rule create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --nsg-name {{ nsg_name }}
+        --name AllowSMB
+        --priority 1010
+        --destination-port-ranges 445
+        --protocol Tcp
+        --access Allow
+        --direction Inbound
+            - name: Create NIC
+      command: >
+        az network nic create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ nic_name }}
+        --vnet-name {{ vnet_name }}
+        --subnet {{ subnet_name }}
+        --public-ip-address {{ public_ip_name }}
+        --network-security-group {{ nsg_name }}
+
+    - name: Create Windows VM (Gen 2)
+      command: >
+        az vm create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ vm_name }}
+        --nics {{ nic_name }}
+        --image {{ marketplace_image }}
+        --admin-username {{ admin_username }}
+        --admin-password {{ temp_admin_password }}
+        --size {{ vm_size }}
+
+    - name: "Post-Config: Create Admin2 & Open Firewall"
+      command: >
+        az vm run-command invoke
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ vm_name }}
+        --command-id RunPowerShellScript
+        --scripts "net user Admin2 \"Passw0rd!\" /add; net localgroup Administrators Admin2 /add; netsh advfirewall firewall set rule group='File and Printer Sharing' new enable=yes"
+
+    - name: Show public IP
+      command: >
+        az vm list-ip-addresses
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ vm_name }}
+        --query "[0].virtualMachine.network.publicIpAddresses[0].ipAddress"
+        --output tsv
+      register: public_ip
+
+    - debug:
+        msg: "Success! IP: {{ public_ip.stdout }} | Login: Admin2 | Pass: Passw0rd!"
