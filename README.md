@@ -27,7 +27,8 @@ This simulation covers the following stages of the Cyber Kill Chain:
 ## General User Advice
 
 -   The provided ransomware is for simulation purposes only and encrypts bogus files.
--   When configuring the injects, double-check that you have assigned the correct assets and updated the IP address for Inject 2.
+-   When configuring the injects, double-check that you have assigned the correct assets and updated target computer's IP address for Inject 2.
+-   Ensure that the OpenBAS ip address points to your OpenBAS server in injects 4 and 5.
 
 ## Resources
 
