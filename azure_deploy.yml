@@ -1,5 +1,5 @@
 ---
-- name: "End-to-end: Downloaded VHD -> Azure Image -> VM"
+- name: "Deploy TWO Identical Windows VMs"
   hosts: localhost
   connection: local
   gather_facts: false
@@ -8,24 +8,27 @@
     azure_tenant_id: "87742002-ea9f-4d0c-a979-6c0dd90a4a18"
     azure_subscription_id: "3961ff7d-1efb-4020-ba80-0ecb29884f8e"
 
-
     marketplace_image: "MicrosoftWindowsServer:WindowsServer:2019-Datacenter-gensecond:latest"
 
-    random_id: "900"
+    random_id: "600"
     azure_location: "northeurope"
     target_resource_group: "rg-openbas-win-{{ random_id }}"
 
-    vm_name: "BASVM"
+
+    vm_names:
+      - "BASVM1"
+      - "BASVM2"
+
     vm_size: "Standard_DC2s_v3"
 
+    # Creation Admin
     admin_username: "openbasadmin"
     temp_admin_password: "FontysBas123!"
 
+    # NETWORK NAMES
     vnet_name: "winVnet"
     subnet_name: "winSubnet"
-    public_ip_name: "winPublicIP"
     nsg_name: "winNSG"
-    nic_name: "winNIC"
 
   tasks:
     - name: Create resource group
@@ -42,8 +45,7 @@
         --resource-group {{ target_resource_group }}
         --name {{ vnet_name }}
         --address-prefix 10.0.0.0/16
-
-    - name: Create subnet
+            - name: Create subnet
       command: >
         az network vnet subnet create
         --subscription {{ azure_subscription_id }}
@@ -51,14 +53,6 @@
         --vnet-name {{ vnet_name }}
         --name {{ subnet_name }}
         --address-prefix 10.0.1.0/24
-
-    - name: Create public IP
-      command: >
-        az network public-ip create
-        --subscription {{ azure_subscription_id }}
-        --resource-group {{ target_resource_group }}
-        --name {{ public_ip_name }}
-        --allocation-method Static
 
     - name: Create NSG
       command: >
@@ -92,47 +86,74 @@
         --protocol Tcp
         --access Allow
         --direction Inbound
-            - name: Create NIC
+    - name: Create Public IPs
+      command: >
+        az network public-ip create
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name {{ item }}-PublicIP
+        --allocation-method Static
+      loop: "{{ vm_names }}"
+
+    - name: Create NICs
       command: >
         az network nic create
         --subscription {{ azure_subscription_id }}
         --resource-group {{ target_resource_group }}
-        --name {{ nic_name }}
+        --name {{ item }}-NIC
         --vnet-name {{ vnet_name }}
         --subnet {{ subnet_name }}
-        --public-ip-address {{ public_ip_name }}
+        --public-ip-address {{ item }}-PublicIP
         --network-security-group {{ nsg_name }}
+      loop: "{{ vm_names }}"
 
-    - name: Create Windows VM (Gen 2)
+    - name: Create Windows VMs (Gen 2)
       command: >
         az vm create
         --subscription {{ azure_subscription_id }}
         --resource-group {{ target_resource_group }}
-        --name {{ vm_name }}
-        --nics {{ nic_name }}
+        --name {{ item }}
+        --nics {{ item }}-NIC
         --image {{ marketplace_image }}
         --admin-username {{ admin_username }}
         --admin-password {{ temp_admin_password }}
         --size {{ vm_size }}
+      loop: "{{ vm_names }}"
 
     - name: "Post-Config: Create Admin2 & Open Firewall"
       command: >
         az vm run-command invoke
         --subscription {{ azure_subscription_id }}
         --resource-group {{ target_resource_group }}
-        --name {{ vm_name }}
+        --name {{ item }}
         --command-id RunPowerShellScript
         --scripts "net user Admin2 \"Passw0rd!\" /add; net localgroup Administrators Admin2 /add; netsh advfirewall firewall set rule group='File and Printer Sharing' new enable=yes"
+      loop: "{{ vm_names }}"
+      # --- DISPLAY OUTPUT ---
 
-    - name: Show public IP
+    - name: Show Public IP for BASVM1
       command: >
         az vm list-ip-addresses
         --subscription {{ azure_subscription_id }}
         --resource-group {{ target_resource_group }}
-        --name {{ vm_name }}
+        --name BASVM1
         --query "[0].virtualMachine.network.publicIpAddresses[0].ipAddress"
         --output tsv
-      register: public_ip
+      register: ip_vm1
+
+    - name: Show Public IP for BASVM2
+      command: >
+        az vm list-ip-addresses
+        --subscription {{ azure_subscription_id }}
+        --resource-group {{ target_resource_group }}
+        --name BASVM2
+        --query "[0].virtualMachine.network.publicIpAddresses[0].ipAddress"
+        --output tsv
+      register: ip_vm2
 
     - debug:
-        msg: "Success! IP: {{ public_ip.stdout }} | Login: Admin2 | Pass: Passw0rd!"
+        msg:
+          - "---------------------------------------------"
+          - "VM 1: BASVM1 | IP: {{ ip_vm1.stdout }} | User: Admin2 | Pass: Passw0rd!"
+          - "VM 2: BASVM2 | IP: {{ ip_vm2.stdout }} | User: Admin2 | Pass: Passw0rd!"
+          - "---------------------------------------------"
