@@ -1,89 +1,151 @@
-Deployment Guide: Azure Windows Lab Environment
-1. Overview
-This automation package deploys a lab environment in Microsoft Azure consisting of two identical Windows Server 2019 Virtual Machines (BASVM1 and BASVM2).
+# Deployment Guide: Azure Windows Lab Environment
+
+## 1. Overview
+
+This automation package deploys a lab environment in **Microsoft Azure** consisting of two identical **Windows Server 2019** Virtual Machines:
+
+* **BASVM1**
+* **BASVM2**
 
 The deployment automatically handles:
 
-Infrastructure: Resource Groups, Virtual Networks, Subnets, and Security Groups.
+* **Infrastructure**: Resource Groups, Virtual Networks, Subnets, and Network Security Groups (NSGs)
+* **Networking**: Public IP addresses and open ports for:
 
-Networking: Public IPs and open ports for RDP (3389) and SMB (445).
+  * RDP (`3389`)
+  * SMB (`445`)
+* **Configuration**:
 
-Configuration: Creates a custom administrator account (Admin2) and enables file sharing firewall rules on both VMs automatically.
+  * Creates a custom administrator account (**Admin2**)
+  * Enables file-sharing firewall rules on both VMs automatically
 
-2. Prerequisites
+---
+
+## 2. Prerequisites
+
 Before running the deployment, ensure your system has the following installed:
 
-Ansible (Core 2.11 or higher)
+* **Ansible** (Core `2.11` or higher)
+* **Azure CLI** (`az`)
+* **Python**, including:
 
-Azure CLI (az)
+  * `azure-cli`
+  * `ansible[azure]`
 
-Python (with azure-cli and ansible[azure] libraries)
+---
 
-3. Configuration Guide
-You must update the azure_deploy_two_vms.yml file with your specific Azure credentials before running it.
+## 3. Configuration Guide
 
-Step 1: Open the Playbook
-Open the file in any text editor (Notepad, VS Code, or Nano).
+You must update the `azure_deploy_two_vms.yml` file with your specific Azure credentials before running the deployment.
 
-Step 2: Update IDs (Required)
-Locate the vars section at the top of the file. Replace the placeholders with your unique Azure IDs.
+### Step 1: Open the Playbook
 
-YAML
+Open the file in any text editor, such as:
 
+* Notepad
+* Visual Studio Code
+* Nano
+
+### Step 2: Update Azure IDs (Required)
+
+Locate the `vars` section at the top of the file and replace the placeholders with your own Azure identifiers.
+
+```yaml
 vars:
-Replace these values with your actual Azure IDs
+  # Replace these values with your actual Azure IDs
   azure_tenant_id: "YOUR_TENANT_ID_GOES_HERE"
   azure_subscription_id: "YOUR_SUBSCRIPTION_ID_GOES_HERE"
-Tip: You can find your IDs by running this command in your terminal: az account show --query "{tenant:tenantId, subscription:id}"
+```
 
-Step 3: Set a Unique Random ID (Recommended)
-To prevent naming conflicts with previous deployments, change the random_id variable to a unique number for every new deployment.
+**Tip:** You can retrieve your Azure IDs by running the following command in your terminal:
 
-YAML
+```bash
+az account show --query "{tenant:tenantId, subscription:id}"
+```
 
-  # Change this number for every fresh deployment (e.g., "101", "102")
-  random_id: "951"
-Step 4: Verify VM Size (Optional)
-The script is configured for Standard_DC2s_v3. If you are deploying in a region that does not support this size, change it to a generic size like Standard_D2s_v3.
+### Step 3: Set a Unique Random ID (Recommended)
 
-4. Deployment Instructions
-1. Login to Azure
-Authenticate your terminal with Azure. Run the following command and complete the browser login process:
+To prevent naming conflicts with previous deployments, update the `random_id` variable for each new deployment.
 
-Bash
+```yaml
+# Change this number for every fresh deployment (e.g., "101", "102")
+random_id: "951"
+```
 
+### Step 4: Verify VM Size (Optional)
+
+The playbook uses the VM size:
+
+```
+Standard_DC2s_v3
+```
+
+If your chosen Azure region does not support this size, you may change it to a more commonly available option, such as:
+
+```
+Standard_D2s_v3
+```
+
+---
+
+## 4. Deployment Instructions
+
+### Step 1: Log in to Azure
+
+Authenticate your terminal with Azure by running:
+
+```bash
 az login
-2. Run the Playbook
-Execute the Ansible playbook using the command below:
+```
 
-Bash
+Complete the browser-based login process when prompted.
 
+### Step 2: Run the Ansible Playbook
+
+Execute the deployment using the following command:
+
+```bash
 ansible-playbook azure_deploy_two_vms.yml
-3. Wait for Completion
-The process typically takes 3 to 5 minutes.
+```
 
-Success: The script will output the Public IP addresses for both VMs at the end.
+### Step 3: Wait for Completion
 
-Failure: If the script fails due to "PublicIPCountLimitReached", you must delete old resource groups to free up your quota.
+* Deployment time: **3–5 minutes** (approximately)
 
-5. Access Information
-Once deployed, you can log in to both Virtual Machines immediately.
+**Success:**
 
-Connection Method: Remote Desktop Protocol (RDP)
+* The public IP addresses for both VMs will be printed in the terminal output.
 
-IP Address: Printed in the terminal output (e.g., 20.10.x.x)
+**Failure:**
 
-Username: openbasadmin
+* If you encounter a `PublicIPCountLimitReached` error, delete unused resource groups to free up your Azure quota.
 
-Password: FontysBas123!
+---
 
-Note:The script automatically created Admin2 for you with full administrative privileges. You can access it from the VM.
+## 5. Access Information
 
-6. Cleanup (Crucial)
-To avoid unnecessary costs or hitting subscription limits, delete the environment as soon as you are finished.
+Once deployment is complete, you can immediately connect to both Virtual Machines.
 
-Run the following command (replacing 951 with the ID you used in the script):
+* **Connection Method**: Remote Desktop Protocol (RDP)
+* **IP Address**: Displayed in the terminal output (e.g., `20.10.x.x`)
+* **Username**: `openbasadmin`
+* **Password**: `FontysBas123!`
 
-Bash
+**Note:**
+The script automatically creates an additional administrator account named **Admin2** with full administrative privileges. This account can be accessed from within the VM.
 
+---
+
+## 6. Cleanup (Crucial)
+
+To avoid unnecessary costs and Azure subscription limits, delete the deployed resources when you are finished.
+
+Run the following command, replacing `951` with the `random_id` value you used:
+
+```bash
 az group delete --name rg-openbas-win-951 --yes --no-wait
+```
+
+---
+
+**End of Deployment Guide**
