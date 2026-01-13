@@ -15,7 +15,7 @@ $ sudo ./init.sh
 $ netstat -nltp  # you should see port 8443 open for 0.0.0.0
 ```
 
-4. Log into both Computer A and B with the credentials “Administrator:Passw0rd!” and install the agents by running the [agent_install.ps1](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/agent_install.ps1) script. Make sure you follow the instructions in the script. 
+4. Log into both Computer A and B with the credentials “Admin2:Passw0rd!” and install the agents by running the [agent_install.ps1](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/agent_install.ps1) script. Make sure you follow the instructions in the script. 
 
 ```text
 Usage:
