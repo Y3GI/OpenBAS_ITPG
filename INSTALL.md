@@ -2,7 +2,7 @@
 
 Note: This installation assumes you already have a working OpenBAS server on a Linux machine.
 
-1. Run the Azure setup script to install the 2 Windows machines required by the simulation into your Azure environment.
+1. Run the Azure setup script to install the 2 Windows machines required by the simulation into your Azure environment Please refer to [Azure Deployment Guide](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/Documents/Deployment%20Guide.md) for detailed explanation.
 
 2. Log into the computer that runs OpenBAS and download [webserver_for_hosting_malware](https://github.com/Y3GI/OpenBAS_ITPG/blob/main/webserver_for_hosting_malware.zip).
 
